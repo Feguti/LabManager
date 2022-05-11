@@ -60,5 +60,6 @@ if(modelName == "Computer")
         command.ExecuteNonQuery();
 
         connection.Close();
+        
     }
 }
