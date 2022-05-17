@@ -14,7 +14,7 @@ class DatabaseSetup
 
     public void CreateComputerTable()
     {
-        var connection = new SqliteConnection("Data Source=database.db");
+        var connection = new SqliteConnection(databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
@@ -42,7 +42,7 @@ class DatabaseSetup
             id int not null primary key,
             number int not null,
             name varchar(100) not null,
-            block var not null
+            sector var not null
     );
 ";
         command.ExecuteNonQuery();
