@@ -7,6 +7,7 @@ var databaseConfig = new DatabaseConfig();
 var databaseSetup = new DatabaseSetup(databaseConfig);
 
 var computerRepository = new ComputerRepository(databaseConfig);
+var labRepository = new LabRepository(databaseConfig);
 
 // Routing
 var modelName = args[0];
@@ -32,63 +33,30 @@ if (modelName == "Computer")
 
         var computer = new Computer(id, ram, processor);
         computerRepository.Save(computer);
-
-
     }
-
 }
 
-if (modelName == "Laboratory")
+if(modelName == "Lab")
 {
-
-    if (modelAction == "List")
+    if(modelAction == "List")
     {
-        var connection = new SqliteConnection("Data Source = database.db");
-        connection.Open();
-
-        var command = connection.CreateCommand();
-
-        command.CommandText = "SELECT id, number, name, sector FROM Laboratories";
-
-        var reader = command.ExecuteReader();
-
-        Console.WriteLine("\nLaboratory List\n");
-        while (reader.Read())
+        Console.WriteLine("\nLab List\n");
+        foreach (var lab in labRepository.GetAll())
         {
-            Console.WriteLine(
-                "{0}, {1}, {2}, {3}", reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetChar(3)
-            );
+            var message = $"{lab.Id}, {lab.Number}, {lab.Name}, {lab.Block}";
+            Console.WriteLine(message);
         }
 
-        reader.Close();
-        connection.Close();
     }
 
-    if (modelAction == "New")
+    if(modelAction == "New")
     {
-        var id = Convert.ToInt32(args[2]);
-        var number = Convert.ToInt32(args[3]);
-        var name = args[4];
-        var sector = args[5];
+        int id = Convert.ToInt32(args[2]);
+        int number = Convert.ToInt32(args[3]);
+        string name = args[4];
+        string block = args[5];
 
-        var connection = new SqliteConnection("Data Source = database.db");
-
-        connection.Open();
-
-        var command = connection.CreateCommand();
-
-        command.CommandText = @"
-            INSERT INTO Laboratories VALUES($id, $number, $name, $sector);
-            
-            ";
-        command.Parameters.AddWithValue("$id", id);
-        command.Parameters.AddWithValue("$number", number);
-        command.Parameters.AddWithValue("$name", name);
-        command.Parameters.AddWithValue("$sector", sector);
-
-        command.ExecuteNonQuery();
-
-        connection.Close();
+        var lab = new Lab(id, ram, processor);
+        computerRepository.Save(computer);
     }
 }
-
