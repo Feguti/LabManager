@@ -43,7 +43,6 @@ if (modelName == "Computer")
         computerRepository.Delete(id); 
     }
 
-<<<<<<< HEAD
     if (modelAction == "Show")
     {
         var id = Convert.ToInt32(args[2]);
@@ -63,8 +62,6 @@ if (modelName == "Computer")
         Console.WriteLine("\nComputer Updated!\nCurrent computer configuration:\n");
         Console.WriteLine("{0}, {1}, {2}", computer.Id, computer.Ram, computer.Processor);
     }
-=======
->>>>>>> main
 }
 
 
