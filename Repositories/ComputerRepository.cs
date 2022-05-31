@@ -64,6 +64,7 @@ class ComputerRepository
         command.ExecuteNonQuery();
     }
 
+<<<<<<< HEAD
     public Computer GetById(int id)
     {
         var connection = new SqliteConnection(databaseConfig.ConnectionString);
@@ -100,6 +101,8 @@ class ComputerRepository
 
         return computer;
     }
+=======
+>>>>>>> main
 }
 
 
