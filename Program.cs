@@ -51,6 +51,17 @@ if (modelName == "Computer")
         Console.WriteLine("{0}, {1}, {2}", computer.Id, computer.Ram, computer.Processor);
 
     }
+
+    if(modelAction == "Update"){
+        var id = Convert.ToInt32(args[2]);
+        var ram = args[3];
+        var processor = args[4];
+
+        var computer = new Computer(id, ram, processor);
+        computerRepository.Update(computer);
+        Console.WriteLine("\nComputer Updated!\nCurrent computer configuration:\n");
+        Console.WriteLine("{0}, {1}, {2}", computer.Id, computer.Ram, computer.Processor);
+    }
 }
 
 
