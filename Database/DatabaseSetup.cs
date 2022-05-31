@@ -30,7 +30,7 @@ class DatabaseSetup
         connection.Close();
     }
 
-    public void CreateLaboratoryTable()
+/*     public void CreateLaboratoryTable()
     {
         var connection = new SqliteConnection("Data Source=database.db");
         connection.Open();
@@ -47,5 +47,5 @@ class DatabaseSetup
 ";
         command.ExecuteNonQuery();
         connection.Close();
-    }
+    } */
 }

@@ -41,7 +41,7 @@ class ComputerRepository
         connection.Open();
 
         var command = connection.CreateCommand();
-        command.CommandText = "INSERT INTO Computers VALUES($id, $ram, $processor)";
+        command.CommandText = "INSERT INTO Computers VALUES($id, $ram, $processor);";
         command.Parameters.AddWithValue("$id", computer.Id);
         command.Parameters.AddWithValue("$ram", computer.Ram);
         command.Parameters.AddWithValue("$processor", computer.Processor);
@@ -50,6 +50,18 @@ class ComputerRepository
         connection.Close();
 
         return computer;
+    }
+
+    public void Delete(int id)
+    {
+        var connection = new SqliteConnection(databaseConfig.ConnectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM Computers WHERE id = $id;";
+        command.Parameters.AddWithValue("$id", id);
+
+        command.ExecuteNonQuery();
     }
 
 }
